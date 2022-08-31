@@ -1,22 +1,23 @@
 import React, {useEffect, useState} from 'react';
-import '../App.css'
+import '../App.scss'
 import Item from '../components/Item';
 
 import { listRepositories } from '../api/github'
+
 
 function Repositories(){
   const [data, setData] = useState([]);
 
   useEffect(() => {
     listRepositories()
-    .then(( data )=>{
+    .then(( data:any )=>{
       setData(data)
     })
   }
   ,[])
   return(
     <ul>
-      {data.map(item => <Item key={item.id} {...item} /> )}
+      {data.map((item:any) => <Item key={item?.id} {...item} /> )}
     </ul>
 )
 }

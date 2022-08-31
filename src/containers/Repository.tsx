@@ -4,14 +4,14 @@ import { getRepository } from '../api/github';
 
 export default function Repository(){
     const { owner, name } = useParams();
-    const [repository, setRepository] = useState({});
+    const [repository, setRepository] = useState({name: ''});
 
     let navigate = useNavigate();
     console.log(navigate);
 
     useEffect(() => {
         getRepository(owner, name)
-        .then(({data})=> setRepository(data));
+        .then(({data}:any)=> setRepository(data));
     })
 
     /* useEffect(()=> console.log('toaqui'), [repository]); */
@@ -21,7 +21,7 @@ export default function Repository(){
         <div>
             <button onClick={()=>navigate('/')}>Voltar</button>
             <Link to='/'>voltar</Link>
-            <h1>{repository.name}</h1>
+            <h1>{repository!.name}</h1>
         </div>
     )
 }
